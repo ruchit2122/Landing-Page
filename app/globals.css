@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Poppins';
+
+  --c-ink: #0a0a0a;
+  --c-body: #444444;
+  --c-muted: #777777;
+  --c-line: #e6e6e6;
+  --c-line-soft: #f0f0f0;
+  --c-bg: #ffffff;
+  --c-bg-alt: #fafafa;
+  --c-dark: #0a0a0a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ---------- Type ---------- */
+
+.display {
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.eyebrow {
+  font-family: var(--font-sans), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+.hairline {
+  height: 1px;
+  width: 100%;
+  background: var(--c-line);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  border-radius: 6px;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--c-ink);
+  border: 1px solid var(--c-ink);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #262626;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2rem;
+  border-radius: 6px;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: #ffffff;
+  color: var(--c-ink);
+  border-color: #ffffff;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: #cccccc;
+}
+
+/* ---------- Reveal Animation ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 999px;
+  border: 3px solid #f5f5f5;
+}
+
+::selection {
+  background: #0a0a0a;
+  color: #ffffff;
+}
