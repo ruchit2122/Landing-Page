@@ -118,51 +118,83 @@ export default function Page() {
   return (
     <main className="relative">
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-[#0e0c07] text-white">
+      <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-[#0e0c07] text-white">
         <div className="hero-mandala-bg" aria-hidden="true">
           <Mandala className="mandala-backdrop" />
         </div>
+        {/* soft gold glow behind the headline */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
+          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.16), transparent 70%)' }}
+          aria-hidden="true"
+        />
+        {/* bottom fade into next section */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(14,12,7,0.9))' }}
+          aria-hidden="true"
+        />
 
-        <div className="relative z-[1] mx-auto max-w-7xl px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <Reveal>
-              <p className="eyebrow eyebrow-mark mb-6 justify-center" style={{ color: 'var(--c-gold-bright)' }}>
-                Vedic Relationship Guidance
-              </p>
-              <h1 className="display display-black text-[1.95rem] leading-[1.08] xs:text-[2.3rem] sm:text-[3.1rem] sm:leading-[1.04] lg:text-[3.8rem]">
-                Tired of Fights, Distance &amp; <span className="gold-text">Unspoken Tension</span> in Your Marriage?
-              </h1>
-              <p className="mx-auto mt-6 max-w-2xl text-[1rem] font-light leading-relaxed text-white/70 sm:text-[1.1rem]">
-                Stop watching your relationship fall apart. Receive proven astrological guidance rooted in
-                ancient Jyotish to bring back the love, trust and peace with your partner.
-              </p>
+        <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-24">
+          <Reveal>
+            {/* decorative emblem */}
+            <div className="mb-7 flex items-center justify-center gap-3" aria-hidden="true">
+              <span className="h-px w-10 bg-gradient-to-r from-transparent to-gold/70" />
+              <Star className="h-4 w-4 text-gold" />
+              <span className="h-px w-10 bg-gradient-to-l from-transparent to-gold/70" />
+            </div>
 
-              <div className="mx-auto mt-7 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full border border-gold/30 bg-white/[0.04] px-4 py-2 text-[0.8rem] font-medium text-white/75 sm:text-[0.85rem]">
-                <Stars />
-                <span>Trusted by 3,000+ couples in 10+ countries</span>
+            <p className="eyebrow mb-5" style={{ color: 'var(--c-gold-bright)' }}>
+              Vedic Relationship Guidance
+            </p>
+
+            <h1
+              className="display display-black text-[2.05rem] leading-[1.1] xs:text-[2.4rem] sm:text-[3.2rem] sm:leading-[1.06] lg:text-[4rem]"
+              style={{ textWrap: 'balance' }}
+            >
+              When Did Your Marriage Become <span className="gold-text">This Quiet?</span>
+            </h1>
+
+            <p
+              className="mx-auto mt-6 max-w-xl text-[1.02rem] font-light leading-relaxed text-white/70 sm:text-[1.12rem]"
+              style={{ textWrap: 'balance' }}
+            >
+              Fights, distance and unspoken tension don&apos;t fix themselves. Receive proven astrological
+              guidance rooted in ancient Jyotish to bring back the love, trust and peace with your partner.
+            </p>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="mt-9 flex flex-col items-center gap-4">
+              <Cta className="w-full sm:w-auto">Chat on WhatsApp</Cta>
+
+              {/* social proof */}
+              <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[0.82rem] font-light text-white/60">
+                <Stars className="align-middle" />
+                <span className="font-medium text-white/80">Trusted by 3,000+ couples</span>
+                <span className="text-white/30">·</span>
+                <span>Private &amp; confidential</span>
               </div>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal delay={120}>
-              <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+          <Reveal delay={220}>
+            <div className="mt-11 border-t border-white/10 pt-7">
+              <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-white/35">
+                Trusted guidance for
+              </p>
+              <div className="flex flex-wrap justify-center gap-2.5">
                 {PROBLEMS.map((p) => (
                   <span
                     key={p}
-                    className="rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-[0.8rem] font-medium text-white/80 sm:px-5 sm:text-[0.85rem]"
+                    className="rounded-full border border-gold/25 bg-white/[0.03] px-4 py-2 text-[0.8rem] font-medium text-white/80 sm:px-5 sm:text-[0.85rem]"
                   >
                     {p}
                   </span>
                 ))}
               </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="mt-9 flex flex-col items-center gap-3">
-                <Cta className="w-full sm:w-auto">Chat on WhatsApp</Cta>
-                <span className="text-[0.78rem] font-light text-white/45">Private &amp; confidential · Reply within hours</span>
-              </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
