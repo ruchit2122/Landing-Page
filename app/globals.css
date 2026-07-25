@@ -171,46 +171,56 @@ body {
   transform: translateY(-3px);
 }
 
-/* ---------- Celestial decorations (gold on black) ---------- */
+/* ---------- Hero mandala background ---------- */
 
-.starfield {
+.hero-mandala-bg {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+  overflow: hidden;
 }
 
-.starfield::before,
-.starfield::after {
-  content: '';
+.mandala {
   position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1.5px 1.5px at 20% 30%, rgba(236, 211, 148, 0.9), transparent),
-    radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 40% 70%, rgba(216, 189, 122, 0.8), transparent),
-    radial-gradient(1px 1px at 85% 60%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1.5px 1.5px at 60% 85%, rgba(236, 211, 148, 0.7), transparent),
-    radial-gradient(1px 1px at 10% 80%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1px 1px at 90% 40%, rgba(216, 189, 122, 0.6), transparent);
+  pointer-events: none;
+  color: #d4af37;
 }
 
-.starfield::after {
-  animation: twinkle 5s ease-in-out infinite alternate;
-  opacity: 0.5;
+.mandala-backdrop {
+  position: relative;
+  width: min(1100px, 150vw);
+  height: min(1100px, 150vw);
+  color: #d4af37;
+  opacity: 0.32;
+  transform-origin: 50% 50%;
+  animation: rotateMandala 90s linear infinite;
+  /* Fade the mandala's own edges so no hard ring line is ever visible */
+  -webkit-mask-image: radial-gradient(circle at center, #000 24%, rgba(0, 0, 0, 0.45) 44%, transparent 64%);
+  mask-image: radial-gradient(circle at center, #000 24%, rgba(0, 0, 0, 0.45) 44%, transparent 64%);
 }
 
-@keyframes twinkle {
-  from { opacity: 0.3; }
-  to { opacity: 0.85; }
+.mandala-backdrop circle,
+.mandala-backdrop ellipse,
+.mandala-backdrop line {
+  stroke-width: 0.7;
 }
 
-.rotate-slow { animation: spin 90s linear infinite; transform-origin: center; }
-.rotate-med { animation: spin 60s linear infinite; transform-origin: center; }
-.rotate-rev { animation: spin-rev 75s linear infinite; transform-origin: center; }
+@media (max-width: 720px) {
+  .mandala-backdrop {
+    width: min(760px, 175vw);
+    height: min(760px, 175vw);
+    opacity: 0.28;
+  }
+}
 
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes spin-rev { to { transform: rotate(-360deg); } }
+@keyframes rotateMandala {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
 /* ---------- Reveal Animation ---------- */
 
@@ -234,7 +244,7 @@ body {
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .rotate-slow, .rotate-med, .rotate-rev { animation: none !important; }
+  .mandala-backdrop { animation: none !important; }
 }
 
 /* ---------- Scrollbar ---------- */

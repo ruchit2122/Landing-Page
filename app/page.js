@@ -1,6 +1,7 @@
 import Reveal from '../components/Reveal';
 import Faq from '../components/Faq';
 import Counter from '../components/Counter';
+import Mandala from '../components/Mandala';
 
 const WHATSAPP =
   'https://wa.me/919999999999?text=Hi%20Acharya%20Ji%2C%20I%20need%20guidance%20for%20my%20relationship.';
@@ -99,36 +100,6 @@ function Stars({ className = '' }) {
   );
 }
 
-/* Zodiac wheel — subtle rotating background decoration */
-function ZodiacRing({ className = '' }) {
-  const glyphs = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
-  return (
-    <svg viewBox="0 0 200 200" className={className} fill="none" aria-hidden="true">
-      <circle cx="100" cy="100" r="94" stroke="currentColor" strokeWidth="1" opacity="0.5" strokeDasharray="3 5" />
-      <circle cx="100" cy="100" r="72" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
-      {glyphs.map((g, i) => {
-        const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-        const x = 100 + Math.cos(angle) * 83;
-        const y = 100 + Math.sin(angle) * 83;
-        return (
-          <text
-            key={i}
-            x={x}
-            y={y}
-            fontSize="13"
-            fill="currentColor"
-            textAnchor="middle"
-            dominantBaseline="central"
-            opacity="0.85"
-          >
-            {g}
-          </text>
-        );
-      })}
-    </svg>
-  );
-}
-
 function Cta({ children = 'BOOK NOW', className = '', variant = 'primary' }) {
   return (
     <a
@@ -147,17 +118,12 @@ export default function Page() {
   return (
     <main className="relative">
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-dark)] text-white">
-        <div className="starfield" aria-hidden="true" />
-        <div
-          className="pointer-events-none absolute left-1/2 top-[-6rem] h-[20rem] w-[20rem] -translate-x-1/2 rounded-full blur-3xl sm:h-[26rem] sm:w-[26rem]"
-          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.28), transparent 65%)' }}
-          aria-hidden="true"
-        />
-        <ZodiacRing className="rotate-slow pointer-events-none absolute -right-20 top-6 hidden h-72 w-72 text-gold/25 sm:block lg:h-[24rem] lg:w-[24rem]" />
-        <ZodiacRing className="rotate-rev pointer-events-none absolute -left-24 bottom-[-6rem] hidden h-64 w-64 text-gold/15 lg:block" />
+      <section className="relative overflow-hidden bg-[#0e0c07] text-white">
+        <div className="hero-mandala-bg" aria-hidden="true">
+          <Mandala className="mandala-backdrop" />
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
+        <div className="relative z-[1] mx-auto max-w-7xl px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <p className="eyebrow eyebrow-mark mb-6 justify-center" style={{ color: 'var(--c-gold-bright)' }}>
@@ -249,10 +215,11 @@ export default function Page() {
       </section>
 
       {/* ================= STATS ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-dark)] py-16 text-white sm:py-24">
-        <div className="starfield" aria-hidden="true" />
-        <ZodiacRing className="rotate-med pointer-events-none absolute left-1/2 top-1/2 hidden h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 text-gold/10 sm:block" />
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+      <section className="relative overflow-hidden bg-[#0e0c07] py-16 text-white sm:py-24">
+        <div className="hero-mandala-bg" aria-hidden="true">
+          <Mandala className="mandala-backdrop" />
+        </div>
+        <div className="relative z-[1] mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal className="mb-10 text-center sm:mb-14">
             <p className="eyebrow eyebrow-mark mb-4 justify-center" style={{ color: 'var(--c-gold-bright)' }}>
               By The Grace of the Stars
@@ -359,14 +326,11 @@ export default function Page() {
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-dark)] py-16 text-white sm:py-28">
-        <div className="starfield" aria-hidden="true" />
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl sm:h-[28rem] sm:w-[28rem]"
-          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.22), transparent 65%)' }}
-          aria-hidden="true"
-        />
-        <div className="relative mx-auto max-w-2xl px-5 text-center sm:px-8">
+      <section className="relative overflow-hidden bg-[#0e0c07] py-16 text-white sm:py-28">
+        <div className="hero-mandala-bg" aria-hidden="true">
+          <Mandala className="mandala-backdrop" />
+        </div>
+        <div className="relative z-[1] mx-auto max-w-2xl px-5 text-center sm:px-8">
           <Reveal>
             <span className="mx-auto mb-6 block gold-line" aria-hidden="true" />
             <h2 className="display display-black text-[2.1rem] leading-[1.06] sm:text-[3.2rem]">
