@@ -25,27 +25,21 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4">
+    <div className="mx-auto max-w-3xl border-t border-[var(--c-line)]">
       {FAQS.map((item, i) => {
         const isOpen = open === i;
         return (
-          <div
-            key={i}
-            className="overflow-hidden rounded-3xl border-[3px] border-[var(--c-ink)] bg-white shadow-[5px_5px_0_0_var(--c-ink)]"
-          >
+          <div key={i} className="border-b border-[var(--c-line)]">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? -1 : i)}
               aria-expanded={isOpen}
-              className="flex w-full items-center gap-4 px-5 py-5 text-left"
+              className="flex w-full items-center gap-4 py-5 text-left"
             >
-              <span className="flex-1 text-[1.02rem] font-bold leading-snug text-ink">{item.q}</span>
+              <span className="flex-1 text-[1rem] font-medium leading-snug text-ink">{item.q}</span>
               <span
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xl font-bold leading-none text-white transition-transform duration-300"
-                style={{
-                  background: 'var(--c-saffron)',
-                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
-                }}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold-soft text-lg leading-none text-gold transition-transform duration-300"
+                style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
                 aria-hidden="true"
               >
                 +
@@ -56,7 +50,7 @@ export default function Faq() {
               style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
             >
               <div className="overflow-hidden">
-                <p className="px-5 pb-6 pr-10 text-[0.95rem] font-medium leading-relaxed text-body">{item.a}</p>
+                <p className="pb-6 pr-10 text-[0.95rem] font-light leading-relaxed text-body">{item.a}</p>
               </div>
             </div>
           </div>

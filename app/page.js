@@ -14,13 +14,11 @@ const BULLETS = [
   'Put an end to the endless loop of daily arguments and growing distance.',
 ];
 
-const BULLET_EMOJI = ['🔮', '💞', '🌙', '🕉️'];
-
 const STATS = [
-  { value: '3', label: 'Generations of Wisdom', emoji: '🪔' },
-  { value: '3,000+', label: 'Relations Saved', emoji: '💖' },
-  { value: '50,000+', label: 'Consultations', emoji: '🔮' },
-  { value: '10+', label: 'Countries', emoji: '🌏' },
+  { value: '3', label: 'Generations of Wisdom' },
+  { value: '3,000+', label: 'Relations Saved' },
+  { value: '50,000+', label: 'Consultations' },
+  { value: '10+', label: 'Countries' },
 ];
 
 const SIGNS = [
@@ -38,47 +36,39 @@ const TESTIMONIALS = [
     text: 'We had stopped talking for weeks. After the remedies, the tension at home slowly cooled down and we finally sat and spoke properly.',
     name: 'Priya S.',
     place: 'Mumbai',
-    emoji: '🌸',
   },
   {
     text: 'My in-laws were constantly interfering. Acharya Ji pointed out exactly where the disturbance was coming from. Things are far more peaceful now.',
     name: 'Rahul M.',
     place: 'Dubai',
-    emoji: '🌟',
   },
   {
     text: 'We were one step away from separation papers. The guidance gave us a calm space to reconnect instead of fighting every single day.',
     name: 'Anjali K.',
     place: 'London',
-    emoji: '💫',
   },
   {
     text: 'Everything stayed completely private. That mattered the most to me. The clarity I received was worth every minute.',
     name: 'Vikram D.',
     place: 'Toronto',
-    emoji: '🔒',
   },
   {
     text: 'The distance between us had become unbearable. Within weeks of following the remedies, the warmth slowly returned.',
     name: 'Meera R.',
     place: 'Ahmedabad',
-    emoji: '🌷',
   },
   {
     text: 'I finally understood the real reason behind our endless arguments. It was not what I assumed at all.',
     name: 'Sanjay P.',
     place: 'Singapore',
-    emoji: '✨',
   },
 ];
 
 const TRUST = [
-  { emoji: '🔒', title: '100% Confidential', desc: 'Your story stays between you & Acharya Ji.' },
-  { emoji: '📿', title: 'Rooted in Vedic Jyotish', desc: 'Ancient scriptural wisdom, never generic advice.' },
-  { emoji: '🪔', title: 'Blessings of 3 Generations', desc: 'A lineage devoted to healing bonds.' },
+  { title: '100% Confidential', desc: 'Your story stays between you & Acharya Ji.' },
+  { title: 'Rooted in Vedic Jyotish', desc: 'Ancient scriptural wisdom, never generic advice.' },
+  { title: 'Blessings of 3 Generations', desc: 'A lineage devoted to healing bonds.' },
 ];
-
-const RIBBON = ['✦ Love', '✦ Peace', '✦ Trust', '✦ Reunion', '✦ Harmony', '✦ Healing', '✦ Clarity', '✦ Blessings'];
 
 /* ---------- Icons ---------- */
 
@@ -103,19 +93,19 @@ function Stars({ className = '' }) {
   return (
     <span className={`inline-flex gap-0.5 ${className}`} aria-label="5 out of 5 stars">
       {[0, 1, 2, 3, 4].map((i) => (
-        <Star key={i} className="h-4 w-4" style={{ color: 'var(--c-gold)' }} />
+        <Star key={i} className="h-4 w-4 text-gold" />
       ))}
     </span>
   );
 }
 
-/* Zodiac wheel — decorative rotating ring */
+/* Zodiac wheel — subtle rotating background decoration */
 function ZodiacRing({ className = '' }) {
   const glyphs = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
   return (
     <svg viewBox="0 0 200 200" className={className} fill="none" aria-hidden="true">
-      <circle cx="100" cy="100" r="94" stroke="currentColor" strokeWidth="1.5" opacity="0.5" strokeDasharray="4 5" />
-      <circle cx="100" cy="100" r="72" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+      <circle cx="100" cy="100" r="94" stroke="currentColor" strokeWidth="1" opacity="0.5" strokeDasharray="3 5" />
+      <circle cx="100" cy="100" r="72" stroke="currentColor" strokeWidth="0.8" opacity="0.35" />
       {glyphs.map((g, i) => {
         const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
         const x = 100 + Math.cos(angle) * 83;
@@ -125,26 +115,17 @@ function ZodiacRing({ className = '' }) {
             key={i}
             x={x}
             y={y}
-            fontSize="14"
+            fontSize="13"
             fill="currentColor"
             textAnchor="middle"
             dominantBaseline="central"
-            opacity="0.9"
+            opacity="0.85"
           >
             {g}
           </text>
         );
       })}
     </svg>
-  );
-}
-
-/* A floating emoji blob */
-function FloatBlob({ emoji, className = '', anim = 'float' }) {
-  return (
-    <span className={`pointer-events-none absolute select-none ${anim} ${className}`} aria-hidden="true">
-      {emoji}
-    </span>
   );
 }
 
@@ -169,55 +150,39 @@ export default function Page() {
       <section className="relative overflow-hidden bg-[var(--c-dark)] text-white">
         <div className="starfield" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-[-8rem] h-[26rem] w-[26rem] -translate-x-1/2 rounded-full blur-2xl"
-          style={{ background: 'radial-gradient(circle, rgba(255,122,61,0.35), transparent 65%)' }}
+          className="pointer-events-none absolute left-1/2 top-[-6rem] h-[20rem] w-[20rem] -translate-x-1/2 rounded-full blur-3xl sm:h-[26rem] sm:w-[26rem]"
+          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.28), transparent 65%)' }}
           aria-hidden="true"
         />
+        <ZodiacRing className="rotate-slow pointer-events-none absolute -right-20 top-6 hidden h-72 w-72 text-gold/25 sm:block lg:h-[24rem] lg:w-[24rem]" />
+        <ZodiacRing className="rotate-rev pointer-events-none absolute -left-24 bottom-[-6rem] hidden h-64 w-64 text-gold/15 lg:block" />
 
-        {/* orbiting rings */}
-        <ZodiacRing className="rotate-slow pointer-events-none absolute -right-24 top-6 h-80 w-80 text-gold-soft/40 sm:h-[26rem] sm:w-[26rem]" />
-        <ZodiacRing className="rotate-rev pointer-events-none absolute -left-28 bottom-[-7rem] h-72 w-72 text-pink/30" />
-
-        {/* floating funky spiritual emojis */}
-        <FloatBlob emoji="🔮" className="left-[6%] top-[18%] text-4xl sm:text-5xl" anim="float" />
-        <FloatBlob emoji="🌙" className="right-[8%] top-[30%] text-4xl sm:text-6xl" anim="float-2" />
-        <FloatBlob emoji="✨" className="left-[14%] bottom-[16%] text-3xl blink" anim="float-slow" />
-        <FloatBlob emoji="🪐" className="right-[16%] bottom-[12%] text-4xl" anim="wobble" />
-        <FloatBlob emoji="☀️" className="left-[46%] top-[8%] text-3xl bob" anim="bob" />
-
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-16 sm:px-8 sm:pb-28 sm:pt-20">
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <span className="eyebrow-pill mb-6 text-white">
-                <span className="text-lg bob">🕉️</span>
-                <span className="eyebrow" style={{ color: 'var(--c-gold-bright)' }}>Vedic Relationship Guidance</span>
-              </span>
-              <h1 className="display display-black text-[2.6rem] leading-[0.98] sm:text-[4.2rem]">
-                Fights, Distance &amp; <span className="gradient-text">Cold Silence</span> Ruining Your Love?
+              <p className="eyebrow eyebrow-mark mb-6 justify-center" style={{ color: 'var(--c-gold-bright)' }}>
+                Vedic Relationship Guidance
+              </p>
+              <h1 className="display display-black text-[1.95rem] leading-[1.08] xs:text-[2.3rem] sm:text-[3.1rem] sm:leading-[1.04] lg:text-[3.8rem]">
+                Tired of Fights, Distance &amp; <span className="gold-text">Unspoken Tension</span> in Your Marriage?
               </h1>
-              <p className="mx-auto mt-7 max-w-2xl text-[1.1rem] font-medium leading-relaxed text-white/75">
-                Stop watching your relationship fall apart! Get powerful astrological remedies rooted in
-                ancient Jyotish to bring back the love, trust &amp; masti with your partner. 💫
+              <p className="mx-auto mt-6 max-w-2xl text-[1rem] font-light leading-relaxed text-white/70 sm:text-[1.1rem]">
+                Stop watching your relationship fall apart. Receive proven astrological guidance rooted in
+                ancient Jyotish to bring back the love, trust and peace with your partner.
               </p>
 
-              {/* rating line */}
-              <div className="mt-7 inline-flex flex-wrap items-center justify-center gap-3 rounded-full border-2 border-gold-soft/40 bg-white/5 px-5 py-2 text-[0.85rem] font-semibold text-white/80">
+              <div className="mx-auto mt-7 flex w-fit max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full border border-gold/30 bg-white/[0.04] px-4 py-2 text-[0.8rem] font-medium text-white/75 sm:text-[0.85rem]">
                 <Stars />
-                <span>Loved by 3,000+ couples in 10+ countries</span>
+                <span>Trusted by 3,000+ couples in 10+ countries</span>
               </div>
             </Reveal>
 
-            {/* problem chips */}
             <Reveal delay={120}>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
-                {PROBLEMS.map((p, i) => (
+              <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+                {PROBLEMS.map((p) => (
                   <span
                     key={p}
-                    className="rounded-full border-2 px-5 py-2.5 text-[0.85rem] font-bold text-white"
-                    style={{
-                      borderColor: ['var(--c-saffron)', 'var(--c-pink)', 'var(--c-purple)', 'var(--c-teal)'][i % 4],
-                      background: 'rgba(255,255,255,0.06)',
-                    }}
+                    className="rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-[0.8rem] font-medium text-white/80 sm:px-5 sm:text-[0.85rem]"
                   >
                     {p}
                   </span>
@@ -226,34 +191,25 @@ export default function Page() {
             </Reveal>
 
             <Reveal delay={200}>
-              <div className="mt-10 flex flex-col items-center gap-3">
-                <Cta>Chat on WhatsApp now</Cta>
-                <span className="text-[0.8rem] font-medium text-white/50">🔒 Private &amp; confidential · Reply within hours</span>
+              <div className="mt-9 flex flex-col items-center gap-3">
+                <Cta className="w-full sm:w-auto">Chat on WhatsApp</Cta>
+                <span className="text-[0.78rem] font-light text-white/45">Private &amp; confidential · Reply within hours</span>
               </div>
             </Reveal>
-          </div>
-        </div>
-
-        {/* scrolling ribbon */}
-        <div className="relative border-y-4 border-[var(--c-ink)] bg-[var(--c-saffron)] py-3 text-[var(--c-ink)]">
-          <div className="marquee gap-8 whitespace-nowrap text-lg font-extrabold uppercase tracking-wide">
-            {[...RIBBON, ...RIBBON].map((r, i) => (
-              <span key={i} className="mx-4">{r}</span>
-            ))}
           </div>
         </div>
       </section>
 
       {/* ================= TRUST BAND ================= */}
-      <section className="bg-[var(--c-bg-alt)] py-10">
-        <div className="mx-auto grid max-w-7xl gap-5 px-5 sm:grid-cols-3 sm:px-8">
+      <section className="border-b border-[var(--c-line)] bg-[var(--c-bg-alt)]">
+        <div className="mx-auto grid max-w-7xl divide-y divide-[var(--c-line)] px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
           {TRUST.map((t, i) => (
             <Reveal key={t.title} delay={i * 90}>
-              <div className="flex items-start gap-4 rounded-3xl border-[3px] border-[var(--c-ink)] bg-white/70 p-5 shadow-[5px_5px_0_0_var(--c-ink)]">
-                <span className="text-3xl bob">{t.emoji}</span>
+              <div className="flex items-start gap-4 py-6 sm:px-6 sm:py-8">
+                <Star className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                 <div>
-                  <p className="text-[1rem] font-extrabold text-ink">{t.title}</p>
-                  <p className="mt-0.5 text-[0.82rem] font-medium leading-snug text-body">{t.desc}</p>
+                  <p className="text-[0.95rem] font-semibold text-ink">{t.title}</p>
+                  <p className="mt-1 text-[0.82rem] font-light leading-snug text-body">{t.desc}</p>
                 </div>
               </div>
             </Reveal>
@@ -262,35 +218,28 @@ export default function Page() {
       </section>
 
       {/* ================= BULLETS ================= */}
-      <section className="relative overflow-hidden py-20 sm:py-24">
-        <FloatBlob emoji="🌟" className="right-[5%] top-[10%] text-4xl opacity-70" anim="float" />
-        <FloatBlob emoji="💜" className="left-[4%] bottom-[12%] text-4xl opacity-70" anim="float-2" />
+      <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <Reveal>
-              <span className="eyebrow-pill mb-4">
-                <span className="text-lg">🔮</span>
-                <span className="eyebrow">What You Receive</span>
-              </span>
-              <h2 className="display text-[2.6rem] leading-[1] text-ink sm:text-[3.2rem]">
-                Real answers.<br /><span className="gradient-text">Sacred remedies.</span>
+              <p className="eyebrow eyebrow-mark mb-4">What You Receive</p>
+              <h2 className="display text-[2rem] leading-[1.08] text-ink sm:text-[2.7rem] sm:leading-[1.05]">
+                Real answers.<br /><span className="gold-text">Sacred remedies.</span>
               </h2>
-              <p className="mt-6 max-w-sm text-[1rem] font-medium leading-relaxed text-body">
-                Every reading is drawn from YOUR birth chart &amp; the wisdom of Vedic Jyotish — never
-                copy-paste advice, only guidance meant for your bond. 🙏
+              <p className="mt-5 max-w-md text-[0.98rem] font-light leading-relaxed text-body sm:text-[1rem]">
+                Every reading is drawn from your own birth chart and the wisdom of Vedic Jyotish — never
+                generic advice, only guidance meant for your bond.
               </p>
-              <Cta className="mt-8">Book your reading</Cta>
+              <Cta className="mt-7">Book your reading</Cta>
             </Reveal>
 
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
               {BULLETS.map((b, i) => (
                 <Reveal key={i} delay={i * 90}>
-                  <div
-                    className="h-full rounded-3xl border-[3px] border-[var(--c-ink)] p-6 shadow-[6px_6px_0_0_var(--c-ink)]"
-                    style={{ background: ['#fff0e0', '#ffe4f0', '#efe7ff', '#e0fbf5'][i % 4] }}
-                  >
-                    <span className="text-4xl float inline-block">{BULLET_EMOJI[i]}</span>
-                    <p className="mt-4 text-[0.98rem] font-medium leading-relaxed text-ink">{b}</p>
+                  <div className="flex h-full flex-col rounded-2xl border border-[var(--c-line)] bg-[var(--c-bg)] p-6 transition-colors hover:border-gold-soft">
+                    <span className="display text-2xl text-gold">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="mt-3 gold-line" aria-hidden="true" />
+                    <p className="mt-4 text-[0.95rem] font-light leading-relaxed text-body">{b}</p>
                   </div>
                 </Reveal>
               ))}
@@ -300,34 +249,33 @@ export default function Page() {
       </section>
 
       {/* ================= STATS ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-dark)] py-20 text-white sm:py-24">
+      <section className="relative overflow-hidden bg-[var(--c-dark)] py-16 text-white sm:py-24">
         <div className="starfield" aria-hidden="true" />
-        <ZodiacRing className="rotate-med pointer-events-none absolute left-1/2 top-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 text-gold-soft/10" />
-        <FloatBlob emoji="🌙" className="left-[8%] top-[16%] text-4xl" anim="float" />
-        <FloatBlob emoji="⭐" className="right-[10%] bottom-[18%] text-4xl" anim="float-2" />
+        <ZodiacRing className="rotate-med pointer-events-none absolute left-1/2 top-1/2 hidden h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 text-gold/10 sm:block" />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-          <Reveal className="mb-14 text-center">
-            <span className="eyebrow-pill mb-4">
-              <span className="text-lg wobble">🌠</span>
-              <span className="eyebrow" style={{ color: 'var(--c-gold-bright)' }}>By The Grace of the Stars</span>
-            </span>
-            <h2 className="display display-black text-[2.2rem] leading-tight sm:text-[3rem]">
-              A legacy couples trust for <span className="gradient-text">generations</span>
+          <Reveal className="mb-10 text-center sm:mb-14">
+            <p className="eyebrow eyebrow-mark mb-4 justify-center" style={{ color: 'var(--c-gold-bright)' }}>
+              By The Grace of the Stars
+            </p>
+            <h2 className="display text-[1.9rem] leading-tight sm:text-[2.8rem]">
+              A legacy couples have trusted for <span className="gold-text">generations</span>
             </h2>
           </Reveal>
 
-          <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-y-10 lg:grid-cols-4 lg:gap-y-0">
             {STATS.map((s, i) => (
-              <Reveal key={s.label} delay={i * 90}>
-                <div className="rounded-[26px] border-[3px] border-gold-soft/40 bg-white/[0.04] p-6 text-center shadow-[6px_6px_0_0_rgba(255,203,94,0.25)]">
-                  <span className="text-3xl bob inline-block">{s.emoji}</span>
-                  <p className="display display-black mt-2 text-[2.8rem] leading-none tracking-tight text-gold-bright sm:text-[3.4rem]">
-                    <Counter value={s.value} />
-                  </p>
-                  <p className="mx-auto mt-3 max-w-[11rem] text-[0.8rem] font-bold uppercase leading-snug tracking-wide text-white/60">
-                    {s.label}
-                  </p>
-                </div>
+              <Reveal
+                key={s.label}
+                delay={i * 90}
+                className={`px-3 text-center sm:px-6 ${i > 0 ? 'lg:border-l lg:border-white/10' : ''}`}
+              >
+                <p className="display display-black text-[2.1rem] leading-none tracking-tight text-gold-bright sm:text-[3.2rem]">
+                  <Counter value={s.value} />
+                </p>
+                <span className="mx-auto mt-4 block gold-line" aria-hidden="true" />
+                <p className="mx-auto mt-4 max-w-[11rem] text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-white/55 sm:text-[0.78rem]">
+                  {s.label}
+                </p>
               </Reveal>
             ))}
           </div>
@@ -335,79 +283,57 @@ export default function Page() {
       </section>
 
       {/* ================= SIGNS ================= */}
-      <section className="relative overflow-hidden py-20 sm:py-24">
-        <FloatBlob emoji="💔" className="right-[6%] top-[12%] text-4xl opacity-70" anim="wobble" />
-        <FloatBlob emoji="🌗" className="left-[5%] bottom-[10%] text-4xl opacity-70" anim="float" />
+      <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal className="text-center">
-            <span className="eyebrow-pill mb-4">
-              <span className="text-lg bob">👀</span>
-              <span className="eyebrow">Does This Sound Familiar</span>
-            </span>
-            <h2 className="display text-[2.2rem] leading-tight text-ink sm:text-[3rem]">
-              If your love life sounds like <span className="gradient-text">this…</span>
+            <p className="eyebrow eyebrow-mark mb-4 justify-center">Does This Sound Familiar</p>
+            <h2 className="display text-[1.9rem] leading-tight text-ink sm:text-[2.8rem]">
+              If your marriage starts sounding like <span className="gold-text">this…</span>
             </h2>
           </Reveal>
 
-          <div className="mt-12 space-y-4">
+          <div className="mt-10 divide-y divide-[var(--c-line)] border-y border-[var(--c-line)] sm:mt-12">
             {SIGNS.map((s, i) => (
               <Reveal key={i} delay={i * 50}>
-                <div
-                  className="flex items-start gap-4 rounded-3xl border-[3px] border-[var(--c-ink)] bg-white p-5 shadow-[5px_5px_0_0_var(--c-ink)] transition-transform hover:-translate-y-1"
-                  style={{ background: ['#fff', '#fff6ec'][i % 2] }}
-                >
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-[0.95rem] font-extrabold text-white"
-                    style={{ background: ['var(--c-saffron)', 'var(--c-pink)', 'var(--c-purple)', 'var(--c-teal)'][i % 4] }}
-                  >
+                <div className="flex items-start gap-4 py-5 sm:gap-5">
+                  <span className="display shrink-0 text-[1rem] leading-6 text-gold">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <p className="pt-1.5 text-[0.98rem] font-medium leading-relaxed text-ink">{s}</p>
+                  <p className="text-[0.95rem] font-light leading-relaxed text-body sm:text-[0.98rem]">{s}</p>
                 </div>
               </Reveal>
             ))}
           </div>
 
-          <Reveal delay={100} className="mt-12 text-center">
-            <Cta>Fix it on WhatsApp</Cta>
+          <Reveal delay={100} className="mt-10 text-center sm:mt-12">
+            <Cta className="w-full sm:w-auto">Book your WhatsApp consultation</Cta>
           </Reveal>
         </div>
       </section>
 
       {/* ================= TESTIMONIALS ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-bg-alt)] py-20 sm:py-24">
-        <FloatBlob emoji="💌" className="left-[5%] top-[8%] text-4xl opacity-70" anim="float" />
-        <FloatBlob emoji="🥰" className="right-[6%] bottom-[10%] text-4xl opacity-70" anim="float-2" />
+      <section className="border-t border-[var(--c-line)] bg-[var(--c-bg-alt)] py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow-pill mb-4">
-              <span className="text-lg bob">💞</span>
-              <span className="eyebrow">Blessings From Couples</span>
-            </span>
-            <h2 className="display display-black text-[2.2rem] leading-tight text-ink sm:text-[3rem]">
-              Real couples. <span className="gradient-text">Real reunions.</span>
+            <p className="eyebrow eyebrow-mark mb-4 justify-center">Blessings From Couples</p>
+            <h2 className="display text-[1.9rem] leading-tight text-ink sm:text-[2.8rem]">
+              Real couples. <span className="gold-text">Real reunions.</span>
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {TESTIMONIALS.map((t, i) => (
               <Reveal key={i} delay={(i % 3) * 90}>
-                <figure className="card flex h-full flex-col p-7">
-                  <div className="mb-4 flex items-center justify-between">
-                    <Stars />
-                    <span className="text-2xl bob">{t.emoji}</span>
-                  </div>
-                  <blockquote className="flex-1 text-[0.95rem] font-medium leading-relaxed text-ink">“{t.text}”</blockquote>
-                  <figcaption className="mt-6 flex items-center gap-3 border-t-2 border-dashed pt-5" style={{ borderColor: 'var(--c-line)' }}>
-                    <span
-                      className="flex h-10 w-10 items-center justify-center rounded-2xl text-[0.85rem] font-extrabold text-white"
-                      style={{ background: ['var(--c-saffron)', 'var(--c-pink)', 'var(--c-purple)'][i % 3] }}
-                    >
+                <figure className="card flex h-full flex-col p-6 sm:p-7">
+                  <Stars className="mb-4" />
+                  <blockquote className="flex-1 text-[0.95rem] font-light leading-relaxed text-body">“{t.text}”</blockquote>
+                  <figcaption className="mt-6 flex items-center gap-3 border-t border-[var(--c-line)] pt-5">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-[0.85rem] font-semibold text-gold">
                       {t.name.charAt(0)}
                     </span>
                     <span>
-                      <span className="block text-[0.9rem] font-extrabold text-ink">{t.name}</span>
-                      <span className="block text-[0.78rem] font-medium text-muted">{t.place}</span>
+                      <span className="block text-[0.9rem] font-semibold text-ink">{t.name}</span>
+                      <span className="block text-[0.78rem] font-light text-muted">{t.place}</span>
                     </span>
                   </figcaption>
                 </figure>
@@ -418,16 +344,12 @@ export default function Page() {
       </section>
 
       {/* ================= FAQ ================= */}
-      <section className="relative overflow-hidden py-20 sm:py-24">
-        <FloatBlob emoji="❓" className="right-[7%] top-[14%] text-4xl opacity-60" anim="float" />
+      <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
-          <Reveal className="mb-12 text-center">
-            <span className="eyebrow-pill mb-4">
-              <span className="text-lg wobble">🕉️</span>
-              <span className="eyebrow">Your Questions</span>
-            </span>
-            <h2 className="display display-black text-[2.2rem] leading-tight text-ink sm:text-[3rem]">
-              Frequently Asked <span className="gradient-text">Questions</span>
+          <Reveal className="mb-10 text-center sm:mb-12">
+            <p className="eyebrow eyebrow-mark mb-4 justify-center">Your Questions</p>
+            <h2 className="display text-[1.9rem] leading-tight text-ink sm:text-[2.8rem]">
+              Frequently Asked <span className="gold-text">Questions</span>
             </h2>
           </Reveal>
           <Reveal delay={80}>
@@ -437,42 +359,37 @@ export default function Page() {
       </section>
 
       {/* ================= FINAL CTA ================= */}
-      <section className="relative overflow-hidden bg-[var(--c-dark)] py-20 text-white sm:py-28">
+      <section className="relative overflow-hidden bg-[var(--c-dark)] py-16 text-white sm:py-28">
         <div className="starfield" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl"
-          style={{ background: 'radial-gradient(circle, rgba(255,122,61,0.28), transparent 65%)' }}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[22rem] w-[22rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl sm:h-[28rem] sm:w-[28rem]"
+          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.22), transparent 65%)' }}
           aria-hidden="true"
         />
-        <FloatBlob emoji="🔮" className="left-[10%] top-[16%] text-5xl" anim="float" />
-        <FloatBlob emoji="✨" className="right-[12%] top-[22%] text-4xl blink" anim="float-2" />
-        <FloatBlob emoji="🌙" className="left-[16%] bottom-[14%] text-4xl" anim="wobble" />
         <div className="relative mx-auto max-w-2xl px-5 text-center sm:px-8">
           <Reveal>
-            <span className="text-6xl pulse-glow inline-block">🪔</span>
-            <h2 className="display display-black mt-6 text-[2.4rem] leading-[1.02] sm:text-[3.4rem]">
-              Save Your Love Before It&apos;s <span className="gradient-text">Too Late!</span>
+            <span className="mx-auto mb-6 block gold-line" aria-hidden="true" />
+            <h2 className="display display-black text-[2.1rem] leading-[1.06] sm:text-[3.2rem]">
+              Save Your Love Before the <span className="gold-text">Damage Is Permanent</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-lg text-[1.05rem] font-medium leading-relaxed text-white/75">
-              Take the first step today. Get confidential astrological solutions, one-on-one, on WhatsApp. 💬
+            <p className="mx-auto mt-5 max-w-lg text-[1rem] font-light leading-relaxed text-white/70 sm:text-[1.05rem]">
+              Take the first step today. Get confidential astrological solutions, one-on-one, on WhatsApp.
             </p>
-            <div className="mt-10">
-              <Cta variant="outline">BOOK NOW</Cta>
+            <div className="mt-9">
+              <Cta variant="outline" className="w-full sm:w-auto">BOOK NOW</Cta>
             </div>
-            <p className="mx-auto mt-10 max-w-lg text-[0.82rem] font-semibold leading-relaxed text-white/50">
-              🪔 3 Generations · 💖 3,000+ Relations Saved · 🔮 50,000+ Consultations · 🌏 10+ Countries
+            <p className="mx-auto mt-9 max-w-lg text-[0.8rem] font-light leading-relaxed text-white/45">
+              3 Generations · 3,000+ Relations Saved · 50,000+ Consultations · 10+ Countries
             </p>
           </Reveal>
         </div>
       </section>
 
       {/* ================= STICKY MOBILE CTA ================= */}
-      <div
-        className="fixed inset-x-0 bottom-0 z-50 border-t-4 border-[var(--c-saffron)] bg-[var(--c-dark)] px-4 py-3 md:hidden"
-      >
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gold/30 bg-[var(--c-dark)] px-4 py-3 md:hidden">
         <Cta className="w-full" />
       </div>
-      <div className="h-20 md:hidden" aria-hidden="true" />
+      <div className="h-24 md:hidden" aria-hidden="true" />
     </main>
   );
 }
