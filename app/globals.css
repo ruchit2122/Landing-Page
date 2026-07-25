@@ -192,15 +192,15 @@ body {
 
 .mandala-backdrop {
   position: relative;
-  width: min(1100px, 150vw);
-  height: min(1100px, 150vw);
+  width: min(1200px, 150vw);
+  height: min(1200px, 150vw);
   color: #d4af37;
-  opacity: 0.32;
+  opacity: 0.2;
   transform-origin: 50% 50%;
   animation: rotateMandala 90s linear infinite;
-  /* Fade the mandala's own edges so no hard ring line is ever visible */
-  -webkit-mask-image: radial-gradient(circle at center, #000 24%, rgba(0, 0, 0, 0.45) 44%, transparent 64%);
-  mask-image: radial-gradient(circle at center, #000 24%, rgba(0, 0, 0, 0.45) 44%, transparent 64%);
+  /* Keep the densest linework toward the outer ring, away from the headline text */
+  -webkit-mask-image: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.5) 52%, #000 68%, transparent 92%);
+  mask-image: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.5) 52%, #000 68%, transparent 92%);
 }
 
 .mandala-backdrop circle,

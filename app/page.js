@@ -101,13 +101,10 @@ function Stars({ className = '' }) {
 }
 
 function Cta({ children = 'BOOK NOW', className = '', variant = 'primary' }) {
+  const variantClass =
+    variant === 'outline' ? 'btn-outline' : variant === 'hero' ? 'btn-hero' : 'btn-primary';
   return (
-    <a
-      href={WHATSAPP}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`${variant === 'outline' ? 'btn-outline' : 'btn-primary'} ${className}`}
-    >
+    <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${variantClass} ${className}`}>
       <WaIcon className="h-5 w-5" />
       {children}
     </a>
@@ -118,45 +115,65 @@ export default function Page() {
   return (
     <main className="relative">
       {/* ================= HERO ================= */}
-      <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-[#0e0c07] text-white">
-        <div className="hero-mandala-bg" aria-hidden="true">
-          <Mandala className="mandala-backdrop" />
+      <section className="relative flex min-h-[82vh] items-center overflow-hidden bg-[#0e0c07] text-white">
+        {/* decorative layer, contained to the hero's own box */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="hero-mandala-bg">
+            <Mandala className="mandala-backdrop" />
+          </div>
+          <div
+            className="absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
+            style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.15), transparent 70%)' }}
+          />
+          <div className="absolute inset-0 opacity-60">
+            {[
+              [8, 16], [18, 62], [30, 10], [46, 78], [62, 14], [76, 58], [88, 24], [94, 70], [12, 88],
+            ].map(([x, y], i) => (
+              <span
+                key={i}
+                className="absolute h-[3px] w-[3px] rounded-full bg-white/50"
+                style={{ left: `${x}%`, top: `${y}%` }}
+              />
+            ))}
+          </div>
+          {/* inner vignette for a more composed, premium edge */}
+          <div
+            className="absolute inset-0"
+            style={{ boxShadow: 'inset 0 0 12rem 2rem rgba(14,12,7,0.85)' }}
+          />
         </div>
-        {/* soft gold glow behind the headline */}
+
+        {/* dark pool behind the copy so the gold mandala lines never cross the gold headline text */}
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
-          style={{ background: 'radial-gradient(circle, rgba(191,155,71,0.16), transparent 70%)' }}
+          className="pointer-events-none absolute inset-0"
           aria-hidden="true"
-        />
-        {/* bottom fade into next section */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
-          style={{ background: 'linear-gradient(to bottom, transparent, rgba(14,12,7,0.9))' }}
-          aria-hidden="true"
+          style={{
+            background:
+              'radial-gradient(ellipse 65% 62% at 50% 44%, rgba(14,12,7,0.94) 0%, rgba(14,12,7,0.8) 48%, rgba(14,12,7,0.35) 72%, transparent 88%)',
+          }}
         />
 
-        <div className="relative z-[1] mx-auto w-full max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-24">
+        <div className="relative z-[2] mx-auto w-full max-w-3xl px-5 py-20 text-center sm:px-8 sm:py-24">
           <Reveal>
-            {/* decorative emblem */}
-            <div className="mb-7 flex items-center justify-center gap-3" aria-hidden="true">
+            <div className="mb-6 flex items-center justify-center gap-3" aria-hidden="true">
               <span className="h-px w-10 bg-gradient-to-r from-transparent to-gold/70" />
               <Star className="h-4 w-4 text-gold" />
               <span className="h-px w-10 bg-gradient-to-l from-transparent to-gold/70" />
             </div>
 
-            <p className="eyebrow mb-5" style={{ color: 'var(--c-gold-bright)' }}>
-              Vedic Relationship Guidance
+            <p className="eyebrow" style={{ color: 'var(--c-gold-bright)' }}>
+              Vedic Relationship Guidance · By Acharya Ji
             </p>
 
             <h1
-              className="display display-black text-[2.05rem] leading-[1.1] xs:text-[2.4rem] sm:text-[3.2rem] sm:leading-[1.06] lg:text-[4rem]"
+              className="display display-black mt-5 text-[2rem] leading-[1.12] xs:text-[2.3rem] sm:text-[3rem] sm:leading-[1.08] lg:text-[3.5rem]"
               style={{ textWrap: 'balance' }}
             >
-              When Did Your Marriage Become <span className="gold-text">This Quiet?</span>
+              When Did Your Marriage <span className="gold-text">Become This Quiet?</span>
             </h1>
 
             <p
-              className="mx-auto mt-6 max-w-xl text-[1.02rem] font-light leading-relaxed text-white/70 sm:text-[1.12rem]"
+              className="mx-auto mt-5 max-w-xl text-[0.98rem] font-light leading-relaxed text-white/70 sm:text-[1.05rem]"
               style={{ textWrap: 'balance' }}
             >
               Fights, distance and unspoken tension don&apos;t fix themselves. Receive proven astrological
@@ -165,10 +182,9 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="mt-9 flex flex-col items-center gap-4">
-              <Cta className="w-full sm:w-auto">Chat on WhatsApp</Cta>
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <Cta className="w-full sm:w-auto">Chat with Acharya Ji</Cta>
 
-              {/* social proof */}
               <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[0.82rem] font-light text-white/60">
                 <Stars className="align-middle" />
                 <span className="font-medium text-white/80">Trusted by 3,000+ couples</span>
@@ -179,18 +195,28 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={220}>
-            <div className="mt-11 border-t border-white/10 pt-7">
-              <p className="mb-4 text-[0.72rem] uppercase tracking-[0.2em] text-white/35">
-                Trusted guidance for
-              </p>
-              <div className="flex flex-wrap justify-center gap-2.5">
+            <div className="mt-10 border-t border-white/10 pt-6">
+              <div className="flex flex-wrap justify-center gap-2">
                 {PROBLEMS.map((p) => (
                   <span
                     key={p}
-                    className="rounded-full border border-gold/25 bg-white/[0.03] px-4 py-2 text-[0.8rem] font-medium text-white/80 sm:px-5 sm:text-[0.85rem]"
+                    className="rounded-full border border-gold/25 bg-white/[0.03] px-4 py-1.5 text-[0.78rem] font-medium text-white/80 sm:px-4.5 sm:text-[0.82rem]"
                   >
                     {p}
                   </span>
+                ))}
+              </div>
+
+              <div className="mx-auto mt-8 flex max-w-lg items-start justify-between gap-2">
+                {STATS.map((s, i) => (
+                  <div key={s.label} className={`flex-1 ${i > 0 ? 'border-l border-white/10 pl-2' : ''}`}>
+                    <p className="display display-black text-[1.15rem] leading-none text-gold-bright sm:text-[1.4rem]">
+                      <Counter value={s.value} />
+                    </p>
+                    <p className="mx-auto mt-2 max-w-[6.5rem] text-[0.62rem] font-light uppercase leading-snug tracking-[0.1em] text-white/45 sm:text-[0.66rem]">
+                      {s.label}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
