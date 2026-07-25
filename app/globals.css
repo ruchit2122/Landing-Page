@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,15 +6,24 @@
 
 :root {
   --font-sans: 'Poppins';
+  --font-serif: 'Cormorant Garamond';
 
-  --c-ink: #0a0a0a;
-  --c-body: #444444;
-  --c-muted: #777777;
-  --c-line: #e6e6e6;
-  --c-line-soft: #f0f0f0;
-  --c-bg: #ffffff;
-  --c-bg-alt: #fafafa;
-  --c-dark: #0a0a0a;
+  /* Cosmic / Vedic palette */
+  --c-ink: #1c1338;          /* deep indigo night */
+  --c-body: #4a4360;         /* muted violet-grey text */
+  --c-muted: #8a83a0;        /* soft lavender-grey */
+  --c-line: #e7ddc9;         /* warm parchment line */
+  --c-line-soft: #f2ead9;
+  --c-bg: #fbf7ef;           /* cream / parchment */
+  --c-bg-alt: #f6efe1;
+  --c-dark: #120c2b;         /* night sky */
+  --c-dark-2: #1c1442;       /* lighter night */
+
+  /* Sacred gold / saffron accents */
+  --c-gold: #bd8b3c;
+  --c-gold-soft: #d8b872;
+  --c-gold-bright: #e7c983;
+  --c-saffron: #d98a3d;
 }
 
 * {
@@ -39,25 +48,47 @@ body {
 /* ---------- Type ---------- */
 
 .display {
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-serif), 'Times New Roman', serif;
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: 0;
+  line-height: 1.12;
 }
 
 .eyebrow {
   font-family: var(--font-sans), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--c-muted);
+  font-weight: 500;
+  color: var(--c-gold);
+}
+
+.eyebrow-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.eyebrow-mark::before,
+.eyebrow-mark::after {
+  content: '';
+  height: 1px;
+  width: 1.6rem;
+  background: linear-gradient(90deg, transparent, var(--c-gold-soft));
+}
+
+.eyebrow-mark::after {
+  background: linear-gradient(90deg, var(--c-gold-soft), transparent);
 }
 
 .hairline {
   height: 1px;
   width: 100%;
   background: var(--c-line);
+}
+
+.gold-text {
+  color: var(--c-gold);
 }
 
 /* ---------- Buttons ---------- */
@@ -68,23 +99,25 @@ body {
   justify-content: center;
   gap: 0.6rem;
   padding: 0.95rem 2rem;
-  border-radius: 6px;
+  border-radius: 999px;
   font-family: var(--font-sans), sans-serif;
   font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ffffff;
-  background: var(--c-ink);
-  border: 1px solid var(--c-ink);
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  color: #1c1338;
+  background: linear-gradient(135deg, var(--c-gold-bright), var(--c-gold));
+  border: 1px solid var(--c-gold);
+  box-shadow: 0 8px 24px -10px rgba(189, 139, 60, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .btn-primary:hover {
-  background: #262626;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 12px 30px -10px rgba(189, 139, 60, 0.8);
 }
 
 .btn-outline {
@@ -93,24 +126,25 @@ body {
   justify-content: center;
   gap: 0.6rem;
   padding: 0.95rem 2rem;
-  border-radius: 6px;
+  border-radius: 999px;
   font-family: var(--font-sans), sans-serif;
   font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--c-gold-bright);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: background 0.2s ease, border-color 0.2s ease;
+  border: 1px solid rgba(216, 184, 114, 0.5);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .btn-outline:hover {
-  background: #ffffff;
-  color: var(--c-ink);
-  border-color: #ffffff;
+  background: linear-gradient(135deg, var(--c-gold-bright), var(--c-gold));
+  color: #1c1338;
+  border-color: var(--c-gold-bright);
+  transform: translateY(-2px);
 }
 
 /* ---------- Cards ---------- */
@@ -118,12 +152,62 @@ body {
 .card {
   background: var(--c-bg);
   border: 1px solid var(--c-line);
-  border-radius: 10px;
-  transition: border-color 0.2s ease;
+  border-radius: 14px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .card:hover {
-  border-color: #cccccc;
+  border-color: var(--c-gold-soft);
+  box-shadow: 0 18px 40px -24px rgba(28, 19, 56, 0.35);
+  transform: translateY(-3px);
+}
+
+/* ---------- Celestial decorations ---------- */
+
+.starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.starfield::before,
+.starfield::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(231, 201, 131, 0.9), transparent),
+    radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(216, 184, 114, 0.8), transparent),
+    radial-gradient(1px 1px at 85% 60%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 60% 85%, rgba(231, 201, 131, 0.7), transparent),
+    radial-gradient(1px 1px at 10% 80%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1px 1px at 90% 35%, rgba(216, 184, 114, 0.6), transparent);
+}
+
+.starfield::after {
+  animation: twinkle 5s ease-in-out infinite alternate;
+  opacity: 0.5;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; }
+  to { opacity: 0.8; }
+}
+
+.rotate-slow {
+  animation: spin 90s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.glow-ring {
+  box-shadow: 0 0 0 1px rgba(216, 184, 114, 0.35), 0 0 40px -8px rgba(216, 184, 114, 0.4);
 }
 
 /* ---------- Reveal Animation ---------- */
@@ -148,19 +232,20 @@ body {
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .rotate-slow { animation: none !important; }
 }
 
 /* ---------- Scrollbar ---------- */
 
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-track { background: var(--c-bg-alt); }
 ::-webkit-scrollbar-thumb {
-  background: #cccccc;
+  background: var(--c-gold-soft);
   border-radius: 999px;
-  border: 3px solid #f5f5f5;
+  border: 3px solid var(--c-bg-alt);
 }
 
 ::selection {
-  background: #0a0a0a;
-  color: #ffffff;
+  background: var(--c-gold);
+  color: #1c1338;
 }
