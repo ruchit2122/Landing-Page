@@ -41,8 +41,26 @@ function VolumeIcon({ muted, className = '' }) {
   );
 }
 
+function ArrowIcon({ direction = 'right', className = '' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {direction === 'left' ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
+    </svg>
+  );
+}
+
 export default function VideoSlider() {
   const iframeRefs = useRef([]);
+  const trackRef = useRef(null);
   const [unmutedIndex, setUnmutedIndex] = useState(null);
 
   const toggleVolume = (i) => {
@@ -58,16 +76,25 @@ export default function VideoSlider() {
     setUnmutedIndex(i);
   };
 
+  const scrollByCard = (dir) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const card = track.querySelector('[data-card]');
+    const step = card ? card.offsetWidth + 20 : track.clientWidth * 0.8;
+    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+
   return (
     <div className="relative">
       <div
+        ref={trackRef}
         className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-2 sm:mx-0 sm:px-0"
       >
         {VIDEOS.map((v, i) => (
           <div
             key={v.id}
             data-card
-            className="relative aspect-[9/16] w-[210px] shrink-0 snap-start overflow-hidden rounded-2xl border border-[var(--c-line)] bg-[var(--c-bg)] sm:w-[260px]"
+            className="relative aspect-[9/16] w-[78vw] max-w-[260px] shrink-0 snap-center overflow-hidden rounded-2xl border border-[var(--c-line)] bg-[var(--c-bg)] xs:w-[220px] sm:w-[260px] sm:snap-start"
           >
             <iframe
               ref={(el) => {
@@ -92,6 +119,25 @@ export default function VideoSlider() {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
+        <button
+          type="button"
+          onClick={() => scrollByCard(-1)}
+          aria-label="Previous video"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
+        >
+          <ArrowIcon direction="left" className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByCard(1)}
+          aria-label="Next video"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
+        >
+          <ArrowIcon direction="right" className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );

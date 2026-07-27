@@ -229,13 +229,13 @@ export default function Page() {
               <Cta className="mt-7">Book your reading</Cta>
             </Reveal>
 
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5">
               {BULLETS.map((b, i) => (
                 <Reveal key={i} delay={i * 90}>
-                  <div className="flex h-full flex-col rounded-2xl border border-[var(--c-line)] bg-[var(--c-bg)] p-6 transition-colors hover:border-gold-soft">
-                    <span className="display text-2xl text-gold">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="flex h-full flex-col rounded-2xl border border-[var(--c-line)] bg-[var(--c-bg)] p-4 transition-colors hover:border-gold-soft sm:p-6">
+                    <span className="display text-xl text-gold sm:text-2xl">{String(i + 1).padStart(2, '0')}</span>
                     <span className="mt-3 gold-line" aria-hidden="true" />
-                    <p className="mt-4 text-[0.95rem] font-light leading-relaxed text-body">{b}</p>
+                    <p className="mt-4 text-[0.85rem] font-light leading-relaxed text-body sm:text-[0.95rem]">{b}</p>
                   </div>
                 </Reveal>
               ))}
