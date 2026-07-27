@@ -171,6 +171,17 @@ body {
   transform: translateY(-3px);
 }
 
+/* ---------- Video slider ---------- */
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* ---------- Hero mandala background ---------- */
 
 .hero-mandala-bg {

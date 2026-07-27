@@ -2,6 +2,7 @@ import Reveal from '../components/Reveal';
 import Faq from '../components/Faq';
 import Counter from '../components/Counter';
 import Mandala from '../components/Mandala';
+import VideoSlider from '../components/VideoSlider';
 
 const WHATSAPP =
   'https://wa.me/919999999999?text=Hi%20Acharya%20Ji%2C%20I%20need%20guidance%20for%20my%20relationship.';
@@ -16,7 +17,7 @@ const BULLETS = [
 ];
 
 const STATS = [
-  { value: '3', label: 'Generations of Wisdom' },
+  { value: '3', label: 'Generations of Astrological Wisdom' },
   { value: '3,000+', label: 'Relations Saved' },
   { value: '50,000+', label: 'Consultations' },
   { value: '10+', label: 'Countries' },
@@ -30,39 +31,6 @@ const SIGNS = [
   'Discussions of leaving or ending the relationship are happening more and more often.',
   'No space to express your feelings to save your relationship',
   'Constant misunderstandings & unresolved issues leading to unnecessary fights.',
-];
-
-const TESTIMONIALS = [
-  {
-    text: 'We had stopped talking for weeks. After the remedies, the tension at home slowly cooled down and we finally sat and spoke properly.',
-    name: 'Priya S.',
-    place: 'Mumbai',
-  },
-  {
-    text: 'My in-laws were constantly interfering. Acharya Ji pointed out exactly where the disturbance was coming from. Things are far more peaceful now.',
-    name: 'Rahul M.',
-    place: 'Dubai',
-  },
-  {
-    text: 'We were one step away from separation papers. The guidance gave us a calm space to reconnect instead of fighting every single day.',
-    name: 'Anjali K.',
-    place: 'London',
-  },
-  {
-    text: 'Everything stayed completely private. That mattered the most to me. The clarity I received was worth every minute.',
-    name: 'Vikram D.',
-    place: 'Toronto',
-  },
-  {
-    text: 'The distance between us had become unbearable. Within weeks of following the remedies, the warmth slowly returned.',
-    name: 'Meera R.',
-    place: 'Ahmedabad',
-  },
-  {
-    text: 'I finally understood the real reason behind our endless arguments. It was not what I assumed at all.',
-    name: 'Sanjay P.',
-    place: 'Singapore',
-  },
 ];
 
 const TRUST = [
@@ -101,10 +69,13 @@ function Stars({ className = '' }) {
 }
 
 function Cta({ children = 'BOOK NOW', className = '', variant = 'primary' }) {
-  const variantClass =
-    variant === 'outline' ? 'btn-outline' : variant === 'hero' ? 'btn-hero' : 'btn-primary';
   return (
-    <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${variantClass} ${className}`}>
+    <a
+      href={WHATSAPP}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${variant === 'outline' ? 'btn-outline' : 'btn-primary'} ${className}`}
+    >
       <WaIcon className="h-5 w-5" />
       {children}
     </a>
@@ -162,28 +133,29 @@ export default function Page() {
             </div>
 
             <p className="eyebrow" style={{ color: 'var(--c-gold-bright)' }}>
-              Vedic Relationship Guidance · By Acharya Ji
+              Vedic Relationship Guidance
             </p>
 
             <h1
-              className="display display-black mt-5 text-[2rem] leading-[1.12] xs:text-[2.3rem] sm:text-[3rem] sm:leading-[1.08] lg:text-[3.5rem]"
+              className="display display-black mt-5 text-[1.85rem] leading-[1.16] xs:text-[2.1rem] sm:text-[2.7rem] sm:leading-[1.12] lg:text-[3.1rem]"
               style={{ textWrap: 'balance' }}
             >
-              When Did Your Marriage <span className="gold-text">Become This Quiet?</span>
+              Tired of Fights, Feeling Distant &amp; Unspoken Tension in Your{' '}
+              <span className="gold-text">Marriage or Relationship?</span>
             </h1>
 
             <p
               className="mx-auto mt-5 max-w-xl text-[0.98rem] font-light leading-relaxed text-white/70 sm:text-[1.05rem]"
               style={{ textWrap: 'balance' }}
             >
-              Fights, distance and unspoken tension don&apos;t fix themselves. Receive proven astrological
-              guidance rooted in ancient Jyotish to bring back the love, trust and peace with your partner.
+              Stop watching your relationship fall apart; get proven astrological guidance to bring back love
+              and peace with your partner.
             </p>
           </Reveal>
 
           <Reveal delay={120}>
             <div className="mt-8 flex flex-col items-center gap-4">
-              <Cta className="w-full sm:w-auto">Chat with Acharya Ji</Cta>
+              <Cta className="w-full sm:w-auto">Chat on WhatsApp</Cta>
 
               <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[0.82rem] font-light text-white/60">
                 <Stars className="align-middle" />
@@ -313,7 +285,7 @@ export default function Page() {
           <Reveal className="text-center">
             <p className="eyebrow eyebrow-mark mb-4 justify-center">Does This Sound Familiar</p>
             <h2 className="display text-[1.9rem] leading-tight text-ink sm:text-[2.8rem]">
-              If your marriage starts sounding like <span className="gold-text">this…</span>
+              If your relationship or marriage starts sounding like <span className="gold-text">this…</span>
             </h2>
           </Reveal>
 
@@ -342,29 +314,14 @@ export default function Page() {
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow eyebrow-mark mb-4 justify-center">Blessings From Couples</p>
             <h2 className="display text-[1.9rem] leading-tight text-ink sm:text-[2.8rem]">
-              Real couples. <span className="gold-text">Real reunions.</span>
+              Highly Confidential Astrological Guidance{' '}
+              <span className="gold-text">Trusted by Couples Globally</span>
             </h2>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-            {TESTIMONIALS.map((t, i) => (
-              <Reveal key={i} delay={(i % 3) * 90}>
-                <figure className="card flex h-full flex-col p-6 sm:p-7">
-                  <Stars className="mb-4" />
-                  <blockquote className="flex-1 text-[0.95rem] font-light leading-relaxed text-body">“{t.text}”</blockquote>
-                  <figcaption className="mt-6 flex items-center gap-3 border-t border-[var(--c-line)] pt-5">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-[0.85rem] font-semibold text-gold">
-                      {t.name.charAt(0)}
-                    </span>
-                    <span>
-                      <span className="block text-[0.9rem] font-semibold text-ink">{t.name}</span>
-                      <span className="block text-[0.78rem] font-light text-muted">{t.place}</span>
-                    </span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={90} className="mt-10 sm:mt-14">
+            <VideoSlider />
+          </Reveal>
         </div>
       </section>
 
@@ -392,16 +349,17 @@ export default function Page() {
           <Reveal>
             <span className="mx-auto mb-6 block gold-line" aria-hidden="true" />
             <h2 className="display display-black text-[2.1rem] leading-[1.06] sm:text-[3.2rem]">
-              Save Your Love Before the <span className="gold-text">Damage Is Permanent</span>
+              Save Your Relationship &amp; Marriage Before{' '}
+              <span className="gold-text">Damage Is Permanent!</span>
             </h2>
             <p className="mx-auto mt-5 max-w-lg text-[1rem] font-light leading-relaxed text-white/70 sm:text-[1.05rem]">
-              Take the first step today. Get confidential astrological solutions, one-on-one, on WhatsApp.
+              Get Confidential Astrological Solutions via WhatsApp Today
             </p>
             <div className="mt-9">
               <Cta variant="outline" className="w-full sm:w-auto">BOOK NOW</Cta>
             </div>
             <p className="mx-auto mt-9 max-w-lg text-[0.8rem] font-light leading-relaxed text-white/45">
-              3 Generations · 3,000+ Relations Saved · 50,000+ Consultations · 10+ Countries
+              3 Generations of Astrological Wisdom · 3,000+ Relations Saved · 50,000+ Consultations · 10+ Countries
             </p>
           </Reveal>
         </div>
