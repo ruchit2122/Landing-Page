@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const WEBHOOK_URL = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NmMwNTZmMDYzNzA0MzY1MjY1Ig_3D_3D_pc/IjU3NjcwNTY5MDYzZTA0MzI1MjZiNTUzYzUxMzUi_pc';
 
@@ -28,6 +28,9 @@ const CHALLENGES = [
   'Long-distance Relationship Problems',
   'Trust issues / Misunderstandings',
 ];
+
+const WHATSAPP_NUMBER = '919876543210'; // same number as WhatsAppButton.js
+const WHATSAPP_MESSAGE = 'Hi! I would like to book a consultation.';
 
 function getUTMParams() {
   if (typeof window === 'undefined') return {};
@@ -60,7 +63,7 @@ export default function ContactForm({ className = '' }) {
     submittedAt: '',
   });
   const [status, setStatus] = useState('idle');
-  const pixelFiredRef = useRef(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const utmParams = getUTMParams();
@@ -99,22 +102,8 @@ export default function ContactForm({ className = '' }) {
         body: JSON.stringify(payloadToSend),
       });
       if (!res.ok) throw new Error('Request failed');
-
-      // Fire Meta Pixel Lead event only once after successful form submission
-      if (window.fbq && !pixelFiredRef.current) {
-        pixelFiredRef.current = true;
-        console.log('Firing Meta Pixel Lead event');
-        window.fbq('track', 'Lead', {
-          currency: 'USD',
-          value: 0,
-        });
-      } else if (!window.fbq) {
-        console.warn('Meta Pixel (fbq) not available');
-      } else if (pixelFiredRef.current) {
-        console.log('Meta Pixel Lead event already fired - skipping duplicate');
-      }
-
       setStatus('success');
+      setShowModal(true);
       const utmParams = getUTMParams();
       setForm({
         fullName: '',
@@ -138,6 +127,7 @@ export default function ContactForm({ className = '' }) {
   }
 
   return (
+    <>
     <form
       id="contact-form"
       onSubmit={handleSubmit}
@@ -283,11 +273,6 @@ export default function ContactForm({ className = '' }) {
         </button>
 
         {/* Status Messages */}
-        {status === 'success' && (
-          <p className="text-center text-[0.85rem] font-medium text-gold">
-            Thank you! We&apos;ll reach out to you shortly via WhatsApp.
-          </p>
-        )}
         {status === 'error' && (
           <p className="text-center text-[0.85rem] font-medium" style={{ color: 'var(--c-red)' }}>
             {!WEBHOOK_URL
@@ -302,5 +287,42 @@ export default function ContactForm({ className = '' }) {
         100% secure. We hate spam too.
       </p>
     </form>
+
+    {showModal && (
+      <div
+        className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 px-4"
+        onClick={() => setShowModal(false)}
+      >
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full max-w-sm rounded-2xl border-[3px] border-[var(--c-ink)] bg-[var(--c-bg)] p-6 shadow-[6px_6px_0_0_var(--c-line)] text-center"
+        >
+          <button
+            onClick={() => setShowModal(false)}
+            aria-label="Close"
+            className="absolute right-3 top-3 text-lg font-bold text-ink/50 hover:text-ink"
+          >
+            ✕
+          </button>
+
+          <h3 className="text-[1.3rem] font-bold text-ink">Thank You!</h3>
+          <p className="mt-3 text-[0.95rem] leading-relaxed text-body">
+            Acharya Aman Ji will contact you soon. If you want to connect with them now, click here.
+          </p>
+
+          <a
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary mt-5 inline-flex w-full items-center justify-center gap-2 py-3 text-base font-semibold"
+          >
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

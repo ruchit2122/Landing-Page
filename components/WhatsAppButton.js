@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function WhatsAppButton() {
   const whatsappNumber = '919876543210'; // Replace with your WhatsApp number (country code + number, no spaces/dashes)
-  const whatsappMessage = 'Hi! I would like to book a free consultation.';
+  const whatsappMessage = 'Hi! I would like to book a consultation.';
 
   const handleWhatsAppClick = () => {
     const encodedMessage = encodeURIComponent(whatsappMessage);
