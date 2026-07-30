@@ -15,7 +15,7 @@ const BULLETS = [
 ];
 
 const STATS = [
-  { value: '10+', label: 'Years of Coaching Experience' },
+  { value: '7', label: 'Years of Coaching Experience' },
   { value: '3,000+', label: 'Relations Saved' },
   { value: '50,000+', label: 'Consultations' },
   { value: '10+', label: 'Countries' },
@@ -34,7 +34,7 @@ const SIGNS = [
 const TRUST = [
   { title: '100% Confidential', desc: 'Your story stays strictly between you & your coach.' },
   { title: 'Proven Coaching Methods', desc: 'Practical frameworks, never generic advice.' },
-  { title: '10+ Years Experience', desc: 'A career devoted to healing bonds.' },
+  { title: '7 Years Experience', desc: 'A career devoted to healing bonds.' },
 ];
 
 const SERVICES = [
@@ -409,7 +409,7 @@ export default function Page() {
               <Cta variant="outline" className="w-full sm:w-auto">BOOK NOW</Cta>
             </div>
             <p className="mx-auto mt-9 max-w-lg text-[0.8rem] font-light leading-relaxed text-white/45">
-              10+ Years of Coaching Experience · 3,000+ Relations Saved · 50,000+ Consultations · 10+ Countries
+              7 Years of Coaching Experience · 3,000+ Relations Saved · 50,000+ Consultations · 10+ Countries
             </p>
           </Reveal>
         </div>
