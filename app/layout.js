@@ -1,9 +1,11 @@
 import './globals.css';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import InstagramButton from '@/components/InstagramButton';
 
 export const metadata = {
-  title: 'Save Your Relationship & Marriage — Confidential Astrological Guidance',
+  title: 'Save Your Relationship & Marriage — Confidential Relationship Coaching',
   description:
-    'Stop watching your relationship fall apart. Get proven Astrological guidance to bring back love and peace with your partner. Confidential WhatsApp consultations.',
+    'Stop watching your relationship fall apart. Get proven relationship coaching to bring back love and peace with your partner. Confidential consultations.',
 };
 
 export const viewport = {
@@ -15,7 +17,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <InstagramButton />
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }

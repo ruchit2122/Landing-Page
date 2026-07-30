@@ -1,4 +1,4 @@
-# Relationship Astrology — Landing Page
+# Relationship Coaching — Landing Page
 
 Next.js 14 (App Router) + Tailwind CSS. Build tested, zero errors.
 

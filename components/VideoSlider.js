@@ -3,12 +3,17 @@
 import { useRef, useState } from 'react';
 
 const VIDEOS = [
-  { id: 'Z6yUQm5rvEk', caption: 'Priya S. · Mumbai' },
-  { id: 'Pc5HL58JlA4', caption: 'Rahul M. · Dubai' },
-  { id: 'xkrgJumy1sI', caption: 'Anjali K. · London' },
-  { id: 'Ud6FCyNGpPM', caption: 'Vikram D. · Toronto' },
-  { id: 'pvO65eHUVy4', caption: 'Meera R. · Ahmedabad' },
-  { id: '99ORmS3KW_Q', caption: 'Sanjay P. · Singapore' },
+  { id: 'Pc5HL58JlA4', caption: 'Couples', category: 'couples' },
+  { id: 'xkrgJumy1sI', caption: 'Celebrity', category: 'celebrity' },
+  { id: '99ORmS3KW_Q', caption: 'Couples', category: 'couples' },
+  { id: 'Z6yUQm5rvEk', caption: 'Celebrity', category: 'celebrity' },
+  { id: 'p4wx-Y5f1wY', caption: 'Celebrity', category: 'celebrity' },
+];
+
+const FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'couples', label: 'Couples' },
+  { id: 'celebrity', label: 'Celebrity we worked with' },
 ];
 
 function post(iframe, func) {
@@ -62,6 +67,11 @@ export default function VideoSlider() {
   const iframeRefs = useRef([]);
   const trackRef = useRef(null);
   const [unmutedIndex, setUnmutedIndex] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filteredVideos = activeFilter === 'all'
+    ? VIDEOS
+    : VIDEOS.filter(v => v.category === activeFilter);
 
   const toggleVolume = (i) => {
     if (unmutedIndex === i) {
@@ -85,12 +95,39 @@ export default function VideoSlider() {
   };
 
   return (
-    <div className="relative">
-      <div
-        ref={trackRef}
-        className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-2 sm:mx-0 sm:px-0"
-      >
-        {VIDEOS.map((v, i) => (
+    <div>
+      {/* Filter Buttons */}
+      <div className="mb-8 flex flex-wrap items-center justify-center gap-4 border-b-2 border-[var(--c-line)] pb-4 sm:gap-8 sm:pb-6">
+        {FILTERS.map((filter) => (
+          <button
+            key={filter.id}
+            onClick={() => setActiveFilter(filter.id)}
+            className={`text-sm font-bold uppercase tracking-wider transition-colors duration-200 sm:text-base ${
+              activeFilter === filter.id
+                ? 'border-b-2 border-gold pb-2 text-ink sm:pb-3'
+                : 'text-body hover:text-ink'
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
+        <a
+          href="https://www.instagram.com/acharyaamanofficial"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-bold uppercase tracking-wider text-body transition-colors duration-200 hover:text-ink sm:text-base"
+        >
+          Explore our Instagram page
+        </a>
+      </div>
+
+      {/* Videos Slider */}
+      <div className="relative">
+        <div
+          ref={trackRef}
+          className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-5 pb-2 sm:mx-0 sm:px-0"
+        >
+          {filteredVideos.map((v, i) => (
           <div
             key={v.id}
             data-card
@@ -118,26 +155,27 @@ export default function VideoSlider() {
               <p className="text-[0.8rem] font-medium text-white/90">{v.caption}</p>
             </div>
           </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
-        <button
-          type="button"
-          onClick={() => scrollByCard(-1)}
-          aria-label="Previous video"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
-        >
-          <ArrowIcon direction="left" className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByCard(1)}
-          aria-label="Next video"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
-        >
-          <ArrowIcon direction="right" className="h-5 w-5" />
-        </button>
+        <div className="mt-4 flex items-center justify-center gap-4 sm:hidden">
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            aria-label="Previous video"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
+          >
+            <ArrowIcon direction="left" className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            aria-label="Next video"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--c-line)] bg-[var(--c-bg)] text-ink"
+          >
+            <ArrowIcon direction="right" className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

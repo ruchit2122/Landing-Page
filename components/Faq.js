@@ -5,19 +5,19 @@ import { useState } from 'react';
 const FAQS = [
   {
     q: 'How do I book an online session and what happens next?',
-    a: 'Simply click the book button to connect on WhatsApp. Once you share your details and schedule a time, you will have a direct 1-on-1 consultation with Acharya Ji to discuss your problems and get clear solutions.',
+    a: 'Simply fill out the short form on this page. Once you share your details, your coach will personally reach out to schedule a direct 1-on-1 consultation to discuss your problems and get clear solutions.',
   },
   {
-    q: 'Can astrology help if we are on the verge of separation or divorce?',
-    a: 'Yes. Even when things feel completely broken, planetary remedies can calm down ongoing conflicts, reduce anger, and create a soft space for both of you to talk and reconnect.',
+    q: 'Can coaching help if we are on the verge of separation or divorce?',
+    a: 'Yes. Even when things feel completely broken, guided coaching can calm down ongoing conflicts, reduce anger, and create a soft space for both of you to talk and reconnect.',
   },
   {
-    q: 'Do I need exact birth details like birth time for this?',
-    a: "Exact date, time, and place of birth give the most accurate chart reading. However, if you don't know the exact time, Acharya Ji can still guide you.",
+    q: 'Do I need to share personal history before the session?',
+    a: "Sharing your relationship history and current situation gives the most accurate guidance. If you're not sure where to start, your coach will walk you through it.",
   },
   {
     q: 'What if the problem is caused by family or a third person?',
-    a: 'Third-party interference is very common. By looking at your charts, Acharya Ji can identify where this negative influence is coming from and give you specific remedies to protect your bond from outside disruptions.',
+    a: 'Third-party interference is very common. By understanding your situation, your coach can identify where this negative influence is coming from and give you specific strategies to protect your bond from outside disruptions.',
   },
 ];
 
@@ -25,11 +25,11 @@ export default function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <div className="mx-auto max-w-3xl border-t border-[var(--c-line)]">
+    <div className="mx-auto max-w-3xl border-t-[3px] border-[var(--c-ink)]">
       {FAQS.map((item, i) => {
         const isOpen = open === i;
         return (
-          <div key={i} className="border-b border-[var(--c-line)]">
+          <div key={i} className="border-b-[3px] border-[var(--c-ink)]">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? -1 : i)}
@@ -38,7 +38,7 @@ export default function Faq() {
             >
               <span className="flex-1 text-[1rem] font-medium leading-snug text-ink">{item.q}</span>
               <span
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold-soft text-lg leading-none text-gold transition-transform duration-300"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 border-gold bg-[var(--c-bg-alt)] text-lg font-bold leading-none text-gold transition-transform duration-300"
                 style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
                 aria-hidden="true"
               >
