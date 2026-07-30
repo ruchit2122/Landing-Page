@@ -105,13 +105,17 @@ export default function ContactForm({ className = '' }) {
       if (!res.ok) throw new Error('Request failed');
 
       // Fire Meta Pixel Lead event only once after successful form submission
-      if (window.fbq && !pixelFiredRef.current) {
-        pixelFiredRef.current = true;
-        console.log('🔥 Firing Meta Pixel Lead event to pixel ID: 4507778969494865');
-        window.fbq('track', 'Lead', {
-          currency: 'USD',
-          value: 0,
-        });
+      if (typeof window !== 'undefined' && window.fbq && !pixelFiredRef.current) {
+        try {
+          pixelFiredRef.current = true;
+          console.log('🔥 Firing Meta Pixel Lead event to pixel ID: 4507778969494865');
+          window.fbq('track', 'Lead', {
+            currency: 'USD',
+            value: 0,
+          });
+        } catch (err) {
+          console.warn('⚠️ Error firing pixel:', err);
+        }
       } else if (!window.fbq) {
         console.warn('⚠️ Meta Pixel (fbq) not available - pixel not loaded');
       } else if (pixelFiredRef.current) {

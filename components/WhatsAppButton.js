@@ -1,12 +1,30 @@
 'use client';
 
 import Image from 'next/image';
+import { useRef } from 'react';
 
 export default function WhatsAppButton() {
   const whatsappNumber = '919876543210'; // Replace with your WhatsApp number (country code + number, no spaces/dashes)
   const whatsappMessage = 'Hi! I would like to book a consultation.';
+  const pixelFiredRef = useRef(false);
 
   const handleWhatsAppClick = () => {
+    // Fire Meta Pixel Lead event only once
+    if (typeof window !== 'undefined' && window.fbq && !pixelFiredRef.current) {
+      try {
+        pixelFiredRef.current = true;
+        console.log('🔥 Firing Meta Pixel Lead event - WhatsApp Click');
+        window.fbq('track', 'Lead', {
+          currency: 'USD',
+          value: 0,
+        });
+      } catch (err) {
+        console.warn('⚠️ Error firing pixel:', err);
+      }
+    } else if (!window.fbq) {
+      console.log('ℹ️ Meta Pixel not ready yet');
+    }
+
     const encodedMessage = encodeURIComponent(whatsappMessage);
     window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
   };

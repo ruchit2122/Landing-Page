@@ -1,11 +1,29 @@
 'use client';
 
 import Image from 'next/image';
+import { useRef } from 'react';
 
 export default function InstagramButton() {
   const instagramUrl = 'https://www.instagram.com/acharyaamanofficial';
+  const pixelFiredRef = useRef(false);
 
   const handleInstagramClick = () => {
+    // Fire Meta Pixel Lead event only once
+    if (typeof window !== 'undefined' && window.fbq && !pixelFiredRef.current) {
+      try {
+        pixelFiredRef.current = true;
+        console.log('🔥 Firing Meta Pixel Lead event - Instagram Click');
+        window.fbq('track', 'Lead', {
+          currency: 'USD',
+          value: 0,
+        });
+      } catch (err) {
+        console.warn('⚠️ Error firing pixel:', err);
+      }
+    } else if (!window.fbq) {
+      console.log('ℹ️ Meta Pixel not ready yet');
+    }
+
     window.open(instagramUrl, '_blank');
   };
 

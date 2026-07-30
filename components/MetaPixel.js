@@ -6,31 +6,36 @@ const PIXEL_ID = '4507778969494865';
 
 export default function MetaPixel() {
   useEffect(() => {
-    // Check if fbq is already loaded
+    // Initialize fbq if not already done
     if (window.fbq) {
-      console.log('Meta Pixel already initialized');
+      console.log('✓ Meta Pixel already initialized');
       return;
     }
 
-    // Load the pixel script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-    script.onload = () => {
-      console.log('Meta Pixel script loaded');
-      if (window.fbq) {
-        window.fbq('init', PIXEL_ID);
-        window.fbq('track', 'PageView');
-        console.log('Meta Pixel initialized with ID:', PIXEL_ID);
-      }
-    };
-    script.onerror = () => {
-      console.error('Failed to load Meta Pixel script');
-    };
+    // Create fbq stub before loading script
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
-    document.head.appendChild(script);
+    // Initialize pixel
+    window.fbq('init', PIXEL_ID);
+    window.fbq('track', 'PageView');
+    console.log('✓ Meta Pixel initialized with ID:', PIXEL_ID);
 
-    // Also add noscript pixel image for completeness
+    // Add noscript image fallback
     const noscript = document.createElement('noscript');
     const img = document.createElement('img');
     img.height = '1';
@@ -40,7 +45,7 @@ export default function MetaPixel() {
     noscript.appendChild(img);
     document.body.appendChild(noscript);
 
-    console.log('Meta Pixel component mounted');
+    console.log('✓ Meta Pixel component mounted');
   }, []);
 
   return null;
