@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 export default function WhatsAppButton() {
-  const whatsappNumber = '919876543210'; // Replace with your WhatsApp number (country code + number, no spaces/dashes)
+  const whatsappNumber = '918000759807'; // +91 80007 59807 (country code + number without spaces/dashes/+ sign)
   const whatsappMessage = 'Hi! I would like to book a consultation.';
   const pixelFiredRef = useRef(false);
 

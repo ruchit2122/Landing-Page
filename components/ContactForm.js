@@ -29,7 +29,7 @@ const CHALLENGES = [
   'Trust issues / Misunderstandings',
 ];
 
-const WHATSAPP_NUMBER = '919876543210'; // same number as WhatsAppButton.js
+const WHATSAPP_NUMBER = '918000759807'; // +91 80007 59807 - same number as WhatsAppButton.js
 const WHATSAPP_MESSAGE = 'Hi! I would like to book a consultation.';
 
 function getUTMParams() {
