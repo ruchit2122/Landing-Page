@@ -9,7 +9,7 @@ const VIDEOS = [
   { id: 'Z6yUQm5rvEk', caption: 'Celebrity', category: 'celebrity' },
   { id: 'p4wx-Y5f1wY', caption: 'Celebrity', category: 'celebrity' },
   { id: 'EsFa1gLIzP4', caption: 'Couples', category: 'couples' },
-  { id: 'pLqE12qXKAg', caption: 'Couples', category: 'couples' },
+  // { id: 'pLqE12qXKAg', caption: 'Couples', category: 'couples' },
 ];
 
 const FILTERS = [
