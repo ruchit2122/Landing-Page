@@ -1,6 +1,7 @@
 import './globals.css';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import InstagramButton from '@/components/InstagramButton';
+import MetaPixel from '@/components/MetaPixel';
 
 export const metadata = {
   title: 'Save Your Relationship & Marriage — Confidential Relationship Coaching',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <MetaPixel />
         {children}
         <InstagramButton />
         <WhatsAppButton />

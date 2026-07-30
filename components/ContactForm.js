@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const WEBHOOK_URL = 'https://connect.pabbly.com/webhook-listener/webhook/IjU3NmMwNTZmMDYzNzA0MzY1MjY1Ig_3D_3D_pc/IjU3NjcwNTY5MDYzZTA0MzI1MjZiNTUzYzUxMzUi_pc';
 
@@ -60,6 +60,7 @@ export default function ContactForm({ className = '' }) {
     submittedAt: '',
   });
   const [status, setStatus] = useState('idle');
+  const pixelFiredRef = useRef(false);
 
   useEffect(() => {
     const utmParams = getUTMParams();
@@ -98,6 +99,21 @@ export default function ContactForm({ className = '' }) {
         body: JSON.stringify(payloadToSend),
       });
       if (!res.ok) throw new Error('Request failed');
+
+      // Fire Meta Pixel Lead event only once after successful form submission
+      if (window.fbq && !pixelFiredRef.current) {
+        pixelFiredRef.current = true;
+        console.log('Firing Meta Pixel Lead event');
+        window.fbq('track', 'Lead', {
+          currency: 'USD',
+          value: 0,
+        });
+      } else if (!window.fbq) {
+        console.warn('Meta Pixel (fbq) not available');
+      } else if (pixelFiredRef.current) {
+        console.log('Meta Pixel Lead event already fired - skipping duplicate');
+      }
+
       setStatus('success');
       const utmParams = getUTMParams();
       setForm({
